@@ -28,7 +28,20 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by(id: params[:id])
+    # METHOD 1
+    # @order = Order.find_by(id: params[:id])
+    # if current_user.id == @order.user_id
+    #   render :show
+    # else
+    #   render json: {}, status: :unauthorized
+    # end
+
+    # METHOD 2
+    # @order = Order.find_by(id: params[:id], user_id: current_user.id)
+    # render :show
+
+    # METHOD 3
+    @order = current_user.orders.find_by(id: params[:id])
     render :show
   end
 end
