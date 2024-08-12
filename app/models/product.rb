@@ -12,7 +12,6 @@ class Product < ApplicationRecord
   # end
 
   has_many :images
-  has_many :orders
   has_many :category_products
   has_many :categories, through: :category_products
   # def categories
@@ -20,6 +19,8 @@ class Product < ApplicationRecord
   #     category_product.category
   #   end
   # end
+  has_many :carted_products
+  has_many :orders, through: :carted_products
 
   def is_discounted?
     price <= 10
